@@ -10,11 +10,16 @@ export const metadata = {
   title: "Gadget Cartel",
   description:
     "Welcome to Gadget Cartel, your one stop store for all gadgets",
+    generator: "Next.js",
+  manifest: "/manifest.json",
   openGraph: {
     title: "Gadget Cartel",
     description:
     "Welcome to Gadget Cartel, your one stop store for all gadgets",
     url: "https://gadgetcartel.com.ng",
+    keywords: ["accessories", "mobile", "laptop", "ecommerce"],
+    themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
+  
     siteName: "Gadget Cartel",
     images: [
       {
@@ -31,7 +36,7 @@ export const metadata = {
     card: "summary_large_image",
   },
   icons: {
-    icon: "/favicon.ico", // Correct the path to start from the root
+    icon: "/icons/android-launchericon-192-192.png", // Correct the path to start from the root
     apple: "/apple-touch-icon.png",
     other: [
       {

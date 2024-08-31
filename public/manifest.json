@@ -1,0 +1,16 @@
+{
+    "name": "Gadget Cartel",
+    "description": "Welcome to Gadget Cartel, your one stop store for all gadgets",
+    "start_url": "/",
+    "lang": "en-US",
+    "theme_color": "#ffffff",
+    "display": "standalone",
+    "id":"/",
+    "icons": [
+      {
+        "src": "/icons/android-launchericon-192-192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  }

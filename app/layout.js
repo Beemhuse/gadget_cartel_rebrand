@@ -51,7 +51,7 @@ export const metadata = {
       },
       {
         rel: "manifest",
-        url: "/site.webmanifest",
+        url: "/manifest.json",
       },
       {
         rel: "mask-icon",

@@ -52,15 +52,15 @@ export default function HeroBanner() {
   }, []);
 
   return (
-    <div className="py-10" id="top">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="xl:py-10" id="top">
+      <div className="">
+        <div className="grid  grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Content */}
           <div
             ref={leftBannerRef}
             className="left-content relative flex items-center"
           >
-            <div className="thumb relative ">
+            <div className="thumb relative w-full ">
               <div className="inner-content bg-black bg-opacity-50 w-full h-full flex flex-col justify-center items-center mx-auto absolute z-10 text-white p-4">
                 <h4 className="text-4xl font-bold">We Are Gadget Cartel</h4>
                 <span className="text-lg">Awesome, clean &amp; gadgets</span>

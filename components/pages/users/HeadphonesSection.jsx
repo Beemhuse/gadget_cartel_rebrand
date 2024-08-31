@@ -41,7 +41,7 @@ export default function HeadphonesSection() {
   }, []);
 console.log(products)
   return (
-    <section className="section w-[70%] mx-auto py-10" id="headphones">
+    <section className="section xl:w-[70%] w-full mx-auto py-10" id="headphones">
       <div className="mx-auto px-4">
         <div className="text-left mb-6">
           <h2 className="text-3xl font-bold">Headphones Latest</h2>

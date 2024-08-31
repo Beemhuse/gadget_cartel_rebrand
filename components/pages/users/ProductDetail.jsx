@@ -126,7 +126,7 @@ export default function ProductDetail({ product }) {
             {/* Total Price */}
             <div className="total mt-4">
               <h4 className="text-2xl font-semibold">
-                Total: $
+                Total: N
                 {product.price *
                   (isProductInCart ? isProductInCart.quantity : quantity)}
               </h4>

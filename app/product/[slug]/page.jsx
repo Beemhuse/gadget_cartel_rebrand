@@ -1,37 +1,50 @@
-"use client"
-import ProductDetail from '@/components/pages/users/ProductDetail';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+"use client";
+import ProductDetail from "@/components/pages/users/ProductDetail";
+import { client } from "@/sanity/lib/client";
+import { useEffect, useState } from "react";
 
-// Example product data
-const products = [
-  {
-    id: 1,
-    slug: 'headphone',
-    title: 'Headphone',
-    price: 75,
-    images: ['/headphones_a_3.webp', '/headphones_a_4.webp'],
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-    quote: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiuski smod.',
-  },
-  // ...other products
-];
+export default function Page({ params }) {
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
 
-export default function Page({ params}) {
-    const [product, setProduct] = useState(null);
- 
   useEffect(() => {
-    if (params.slug) {
-      // Find the product based on the slug from the route
-      const foundProduct = products.find((prod) => prod.slug === params.slug);
-      setProduct(foundProduct);
-    }
-  }, [params.slug]); // Re-run the effect whenever the slug changes
+    const fetchProduct = async () => {
+      if (params.slug) {
+        try {
+          const query = `*[_type == "product" && slug.current == $slug][0]{
+            _id,
+            title,
+            price,
+            description,
+            quote,
+            "images": images[].asset->url,
+            "slug": slug.current
+          }`;
+          const productData = await client.fetch(query, { slug: params.slug });
+          if (productData) {
+            setProduct(productData);
+          } else {
+            setError("Product not found.");
+          }
+        } catch (err) {
+          setError("Error fetching product data.");
+          console.error(err);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
 
- 
+    fetchProduct();
+  }, [params.slug]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
   return product ? (
     <ProductDetail product={product} />
   ) : (
-    <p>Loading...</p>
+    <p>Product not found.</p>
   );
 }

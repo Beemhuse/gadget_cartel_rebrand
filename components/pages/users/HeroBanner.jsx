@@ -76,7 +76,7 @@ export default function HeroBanner() {
           <div className="right-content grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
               { title: 'Headphones', description: 'Best Gadgets For Sound', img: '/headphones_b_4.webp' },
-              { title: 'Speakers', description: 'Best Gadgets For Audio', img: '/speaker1.webp' },
+              { title: 'Phones', description: 'Best Gadgets For Phones', img: '/speaker1.webp' },
               { title: 'Watches', description: 'Best Smart Watches', img: '/watch_1.webp' },
               { title: 'Accessories', description: 'Best Trend Accessories', img: '/speaker1.webp' }
             ].map((item, index) => (

@@ -24,7 +24,6 @@ export default function ProductDetail({ product }) {
         toast.success("Product added to cart!");
       }
     } catch (error) {
-      // console.error(error);
       toast.error(error);
     }
   };

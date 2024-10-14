@@ -76,7 +76,6 @@ export default function RootLayout({ children }) {
         // position="top-right"
         // reverseOrder={false}
       />
-        <Navbar />
         {children}
 
       </body>

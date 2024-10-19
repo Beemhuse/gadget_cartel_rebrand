@@ -10,50 +10,50 @@ import Pagination from "@/components/reusables/Pagination";
 // import CreateCategoryModal from "@/components/reusables/modal/CreateCategoryModal";
 
 // Fetch function for SWR
-const fetcher = async (query) => {
-  return await client.fetch(query);
-};
+// const fetcher = async (query) => {
+//   return await client.fetch(query);
+// };
 
 // Fetch categories using SWR
-const useCategories = () => {
-  const { data, error } = useSWR(`*[_type == "category"]`, fetcher);
-  return {
-    categories: data,
-    isLoading: !error && !data,
-    isError: error,
-  };
-};
+// const useCategories = () => {
+//   const { data, error } = useSWR(`*[_type == "category"]`, fetcher);
+//   return {
+//     categories: data,
+//     isLoading: !error && !data,
+//     isError: error,
+//   };
+// };
 
 // Fetch products using SWR
-const useProducts = () => {
-  const { data, error, mutate } = useSWR(
-    `*[_type == "dish" && !(_id in path("drafts.*"))] | order(sortOrder asc) {
-      _id,
-      title,
-      slug,
-      description,
-      price,
-      category->{
-        title,
-        _id
-      },
-      status,
-      sortOrder,
-      image {
-        asset->{
-          url
-        }
-      }
-    }`,
-    fetcher
-  );
-  return {
-    products: data,
-    isLoading: !error && !data,
-    isError: error,
-    mutate,
-  };
-};
+// const useProducts = () => {
+//   const { data, error, mutate } = useSWR(
+//     `*[_type == "dish" && !(_id in path("drafts.*"))] | order(sortOrder asc) {
+//       _id,
+//       title,
+//       slug,
+//       description,
+//       price,
+//       category->{
+//         title,
+//         _id
+//       },
+//       status,
+//       sortOrder,
+//       image {
+//         asset->{
+//           url
+//         }
+//       }
+//     }`,
+//     fetcher
+//   );
+//   return {
+//     products: data,
+//     isLoading: !error && !data,
+//     isError: error,
+//     mutate,
+//   };
+// };
 
 export default function Page() {
   const [isMealModalOpen, setIsMealModalOpen] = useState(false);
@@ -63,9 +63,10 @@ export default function Page() {
   const [currentPage, setCurrentPage] = useState(1); // State for current page
   const itemsPerPage = 12; // Define the number of items per page
 
-  const { categories, isLoading: categoriesLoading, isError: categoriesError } = useCategories();
-  const { products, isLoading: productsLoading, isError: productsError, mutate } = useProducts();
-
+  // const { categories, isLoading: categoriesLoading, isError: categoriesError } = useCategories();
+  // const { products, isLoading: productsLoading, isError: productsError, mutate } = useProducts();
+const categories = []
+const products = []
   // Filter out duplicate category names
   const uniqueCategories = categories?.reduce((acc, category) => {
     if (!acc.find((cat) => cat.title.toLowerCase() === category.title.toLowerCase())) {

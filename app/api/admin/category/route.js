@@ -1,4 +1,3 @@
-// pages/api/categories.js
 import { client } from "@/sanity/lib/client";
 import { isAdmin } from "@/utils/lib/auth";
 import slugify from "slugify";

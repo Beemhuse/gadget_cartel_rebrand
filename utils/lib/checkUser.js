@@ -1,3 +1,9 @@
+
+import { client } from "@/sanity/lib/client";
+
+
+
+
 // Function to ensure a user document exists, or return the existing one
 export const ensureUserExists = async (customerId) => {
   try {
@@ -8,8 +14,6 @@ export const ensureUserExists = async (customerId) => {
     );
 
     if (existingCustomer) {
-      // Return the existing customer document if found
-      // console.log("Existing customer found:", existingCustomer);
       return existingCustomer;
     }
 

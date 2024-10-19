@@ -3,13 +3,16 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 const useCartStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       cart: [],
 
+        // Derived state: Calculate total quantities
+        totalQuantities: () => {
+          return get().cart.reduce((total, item) => total + item.quantity, 0);
+        },
       // Add to cart or update quantity if product exists
       addToCart: (product, quantity = 1) =>
         set((state) => {
-            console.log(product)
           const existingProductIndex = state.cart.findIndex((item) => item.id === product.id);
 
           if (existingProductIndex !== -1) {

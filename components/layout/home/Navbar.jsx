@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import anime from 'animejs';
 import { FaBars, FaTimes, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import ProfileDropdown from './ProfileDropdown';
+import LoginButton from './LoginButton';
+import CartDropdown from './CartDropdown';
 
 // Define menu items
 const menuItems = [
@@ -119,7 +122,12 @@ export default function Navbar() {
               )
             ))}
           </nav>
-
+   {/* Cart, Login, Profile */}
+   <div className="flex space-x-4 items-center">
+            <CartDropdown />
+            <LoginButton />
+            <ProfileDropdown />
+          </div>
           {/* Mobile Menu Trigger */}
           <button className="md:hidden text-gray-700 hover:text-blue-500" onClick={toggleMenu}>
             {menuOpen ? <FaTimes /> : <FaBars />}

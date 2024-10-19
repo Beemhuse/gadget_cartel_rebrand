@@ -1,4 +1,3 @@
-// pages/api/getUserByEmail.js
 
 import { findOrCreateCustomerByEmail } from "@/utils/sanity/findOrCreateCustomer";
 

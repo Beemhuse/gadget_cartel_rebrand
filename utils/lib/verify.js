@@ -1,6 +1,5 @@
 import axios from "axios";
-import { updateTransactionStatus } from "../sanity/client";
-// import { updateTransactionStatus } from "./client";
+import { updateTransactionStatus } from "../sanity";
 
 export const verifyPaystackPayment = async (trxref) => {
   try {
@@ -12,7 +11,6 @@ export const verifyPaystackPayment = async (trxref) => {
     });
 
     const responseData = response.data;
-    // console.log('Paystack Verification Response:', trxref, response.data);
 
     // Handle specific error cases
     if (!responseData.status || !responseData.data) {

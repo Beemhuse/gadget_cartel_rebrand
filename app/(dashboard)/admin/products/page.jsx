@@ -6,9 +6,9 @@ import { client } from "@/sanity/lib/client";
 import Typography from "@/components/reusables/typography/Typography";
 import Button from "@/components/reusables/buttons/Button";
 import Pagination from "@/components/reusables/Pagination";
-import ProductCard from "@/components/card/ProductCard";
-import CreateMealModal from "@/components/reusables/modal/CreateMealModal";
-import CreateCategoryModal from "@/components/reusables/modal/CreateCategoryModal";
+// import ProductCard from "@/components/card/ProductCard";
+// import CreateMealModal from "@/components/reusables/modal/CreateMealModal";
+// import CreateCategoryModal from "@/components/reusables/modal/CreateCategoryModal";
 
 // Fetch function for SWR
 const fetcher = async (query) => {
@@ -145,9 +145,9 @@ export default function Page() {
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {paginatedProducts?.map((product) => (
+        {/* {paginatedProducts?.map((product) => (
           <ProductCard key={product._id} product={product} mutate={mutate} />
-        ))}
+        ))} */}
       </div>
 
       {/* Pagination Component */}
@@ -156,8 +156,8 @@ export default function Page() {
       </div>
 
       {/* Modals */}
-      <CreateMealModal isOpen={isMealModalOpen} onClose={() => setIsMealModalOpen(false)} categories={categories} ingredients={[]} mutate={mutate} />
-      <CreateCategoryModal isOpen={isCategoryModalOpen} onClose={() => setIsCategoryModalOpen(false)} />
+      {/* <CreateMealModal isOpen={isMealModalOpen} onClose={() => setIsMealModalOpen(false)} categories={categories} ingredients={[]} mutate={mutate} /> */}
+      {/* <CreateCategoryModal isOpen={isCategoryModalOpen} onClose={() => setIsCategoryModalOpen(false)} /> */}
     </section>
   );
 }

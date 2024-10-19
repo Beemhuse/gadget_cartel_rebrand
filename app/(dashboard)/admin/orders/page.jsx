@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import Table from "@/components/reusables/table/Table";
-import { client } from '@/utils/sanity/client';
-import Pagination from '@/components/reusables/Pagination';
 import { useRouter } from 'next/navigation';
+import { client } from '@/sanity/lib/client';
+import Table from '@/components/reusables/table/Table';
+import Pagination from '@/components/reusables/Pagination';
 
 
 export default function Page() {

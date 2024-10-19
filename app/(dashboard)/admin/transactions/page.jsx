@@ -1,11 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Table from "@/components/reusables/table/Table";
-import { client } from "@/utils/sanity/client";
-import { FcNext, FcPrevious } from "react-icons/fc";
-import Pagination from '@/components/reusables/Pagination';
-import useCurrencyFormatter from '@/hooks/useCurrencyFormatter';
+import useCurrencyFormatter from "@/components/hooks/useCurrencyFormatter";
+import { client } from "@/sanity/lib/client";
+import Pagination from "@/components/reusables/Pagination";
 
 export default function Page() {
   const [transactions, setTransactions] = useState([]);
@@ -34,7 +33,7 @@ export default function Page() {
         setTransactions(data);
         setFilteredTransactions(data); // Initialize filtered transactions with all data
       } catch (error) {
-        console.error('Error fetching transactions:', error);
+        console.error("Error fetching transactions:", error);
       } finally {
         setIsLoading(false);
       }
@@ -45,19 +44,24 @@ export default function Page() {
 
   // Handle Pagination
   const totalPages = Math.ceil(filteredTransactions.length / pageSize);
-  const paginatedData = filteredTransactions.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  const paginatedData = filteredTransactions.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
   // Handle Filter
   useEffect(() => {
     let updatedTransactions = transactions;
 
     if (filter !== "all") {
-      updatedTransactions = transactions.filter(transaction => transaction.status === filter);
+      updatedTransactions = transactions.filter(
+        (transaction) => transaction.status === filter
+      );
     }
 
     if (searchTerm) {
-      updatedTransactions = updatedTransactions.filter(transaction => 
-        Object.values(transaction).some(val => 
+      updatedTransactions = updatedTransactions.filter((transaction) =>
+        Object.values(transaction).some((val) =>
           String(val).toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
@@ -89,7 +93,11 @@ export default function Page() {
     {
       title: "Date",
       key: "date",
-      render: (data) => <span>{new Date(data.date).toLocaleDateString() ?? "Not Available"}</span>,
+      render: (data) => (
+        <span>
+          {new Date(data.date).toLocaleDateString() ?? "Not Available"}
+        </span>
+      ),
     },
     {
       title: "Customer Name",
@@ -108,7 +116,10 @@ export default function Page() {
         };
         const style = statusStyles[status] || {};
         return (
-          <span style={style} className={`py-2 px-4 rounded-full border ${status && `bg-${style.background}/30 border-${style.background} text-${style.color}`}`}>
+          <span
+            style={style}
+            className={`py-2 px-4 rounded-full border ${status && `bg-${style.background}/30 border-${style.background} text-${style.color}`}`}
+          >
             {data?.status}
           </span>
         );
@@ -117,14 +128,18 @@ export default function Page() {
     {
       title: "Amount",
       key: "amount",
-      render: (data) => <span>{formatCurrency(data.amount ?? "Not Available")}</span>,
+      render: (data) => (
+        <span>{formatCurrency(data.amount ?? "Not Available")}</span>
+      ),
     },
   ];
 
   return (
     <section className="p-4 my-6">
       <div className="shadow-lg p-2">
-        <h2 className="font-bold text-lg border-b-2 py-4 px-2 mb-3">All Transactions</h2>
+        <h2 className="font-bold text-lg border-b-2 py-4 px-2 mb-3">
+          All Transactions
+        </h2>
 
         <div className="flex justify-between items-center mb-4">
           <input
@@ -146,22 +161,15 @@ export default function Page() {
           </select>
         </div>
 
-        {/* {isLoading ? (
-          <p>Loading...</p>
-        ) : filteredTransactions.length === 0 ? (
-          <p>No transactions available</p>
-        ) : (
-        )} */}
         <Table columns={customerColumn} data={paginatedData} isGray={false} />
 
         {/* Use Pagination Component */}
         <div className="my-8">
-
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       </div>
     </section>

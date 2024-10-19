@@ -1,14 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import OrderDetailsCard from "@/components/card/OrderDetailsCard";
-import Typography from "@/components/reusables/typography/Typography";
-import { client } from "@/utils/sanity/client";
-import useCurrencyFormatter from "@/hooks/useCurrencyFormatter";
 import { AiOutlineCheckCircle, AiOutlineWarning } from "react-icons/ai";
 import { MdCancel, MdLocalShipping } from "react-icons/md";
 import Link from "next/link";
-import { toast } from "react-toastify";
+import { client } from "@/sanity/lib/client";
+import Typography from "@/components/reusables/typography/Typography";
+import useCurrencyFormatter from "@/components/hooks/useCurrencyFormatter";
 
 // Status options list
 const statusOptions = [
@@ -173,7 +171,7 @@ export default function Page() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          <OrderDetailsCard
+          {/* <OrderDetailsCard
             title="Customer"
             content={
               <div className="text-gray-700">
@@ -245,7 +243,7 @@ export default function Page() {
                 </p>
               </div>
             }
-          />
+          /> */}
         </div>
 
         <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4">

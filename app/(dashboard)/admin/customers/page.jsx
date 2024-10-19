@@ -2,9 +2,6 @@
 import Pagination from '@/components/reusables/Pagination';
 import Table from '@/components/reusables/table/Table';
 import { client } from '@/sanity/lib/client';
-// import Pagination from '@/components/reusables/Pagination';
-// import Table from '@/components/reusables/table/Table';
-// import { client } from '@/utils/sanity/client';
 import React, { useState, useEffect } from 'react';
 
 export default function CustomersPage() {

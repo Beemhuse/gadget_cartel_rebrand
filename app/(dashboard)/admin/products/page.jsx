@@ -1,14 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import useSWR from "swr";
-import CreateMealModal from "@/components/reusables/modal/CreateMealModal";
-import ProductCard from "@/components/card/ProductCard";
-import Button from "@/components/reusables/buttons/Button";
 import Image from "next/image";
+import { client } from "@/sanity/lib/client";
 import Typography from "@/components/reusables/typography/Typography";
-import CreateCategoryModal from "@/components/reusables/modal/CreateCategoryModal";
-import { client } from "@/utils/sanity/client";
+import Button from "@/components/reusables/buttons/Button";
 import Pagination from "@/components/reusables/Pagination";
+import ProductCard from "@/components/card/ProductCard";
+import CreateMealModal from "@/components/reusables/modal/CreateMealModal";
+import CreateCategoryModal from "@/components/reusables/modal/CreateCategoryModal";
 
 // Fetch function for SWR
 const fetcher = async (query) => {

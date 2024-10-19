@@ -2,8 +2,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-// import useCartStore from '@/store/cartStore'; // Import Zustand store
-// import useCurrencyFormatter from '@/hooks/useCurrencyFormatter'; // Import currency formatter hook
 import { toast } from 'react-hot-toast';
 import { RiDeleteBinLine } from "react-icons/ri";
 import useCurrencyFormatter from '@/components/hooks/useCurrencyFormatter';
@@ -17,7 +15,6 @@ export default function Cart() {
   const removeFromCart = useCartStore((state) => state.removeFromCart); // Remove item from cart
 
   const formatCurrency = useCurrencyFormatter(); // Use currency formatter hook
-console.log(cartItems)
   // Calculate subtotal of all items in the cart
   const calculateSubtotal = () => {
     return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -51,7 +48,7 @@ console.log(cartItems)
     <>
       <div className="bg-white border-t border-gray-200">
         <div className="container mx-auto py-20 lg:py-20">
-          {cartItems.length === 0 ? (
+          {cartItems?.length === 0 ? (
             <div className="text-center mt-8">
               <h2 className="text-xl font-semibold mb-6">Your cart is empty</h2>
               <Link href="/">
@@ -78,7 +75,7 @@ console.log(cartItems)
                       <tr key={item.id} className="border-t">
                         <td className="px-4 py-2 flex items-center">
                           <Image
-                            src={"/item.image.asset.url"}
+                            src={item?.images[0]}
                             alt={item.title}
                             width={50}
                             height={50}
@@ -145,7 +142,7 @@ console.log(cartItems)
                     <span>{formatCurrency(calculateSubtotal())}</span>
                   </div>
                   <Link href="/checkout">
-                    <button className="bg-green-500 text-white px-4 py-2 rounded-md w-full">
+                    <button className="bg-black text-white px-4 py-2 rounded-md w-full">
                       Proceed to checkout
                     </button>
                   </Link>

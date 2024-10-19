@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { AiOutlineHeart, AiFillStar, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
@@ -28,9 +29,11 @@ const ProductCard = ({ product }) => {
       </div>
 
       {/* Product Image */}
-      <img
+      <Image
         src={product.image}
         alt={product.name}
+        height={500}
+        width={500}
         className="w-full h-32 object-contain my-4"
       />
 

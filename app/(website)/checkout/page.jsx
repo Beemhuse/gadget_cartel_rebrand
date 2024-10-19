@@ -1,24 +1,19 @@
 "use client";
-import HomeLayout from "@/components/layout/HomeLayout";
-import { clearCart } from "@/store/reducers/cartReducer";
-import { client } from '@/utils/sanity/client';
-import useCurrencyFormatter from '@/hooks/useCurrencyFormatter';
-import { handleGenericError } from "@/utils/errorHandler";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { getCookie } from "@/utils/getCookie";
+import { toast } from 'react-hot-toast';
+import { useRouter } from "next/navigation";
 import LoadingScreen from "@/components/reusables/LoadingScreen";
-import { useRouter } from "next/navigation"; // Import useRouter for redirection
+import useCurrencyFormatter from "@/components/hooks/useCurrencyFormatter";
+import useCartStore from "@/components/store/cartStore";
+import { getCookie } from "@/utils/getCookie";
 
 const Checkout = () => {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cart, clearCart } = useCartStore(); // Access Zustand store
   const formatCurrency = useCurrencyFormatter();
   const [serviceFees, setServiceFees] = useState([]);
   const [selectedServiceFee, setSelectedServiceFee] = useState(0);
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const router = useRouter(); // Initialize the router
 
@@ -31,10 +26,10 @@ const Checkout = () => {
 
   // Redirect to /menu if cart is empty
   useEffect(() => {
-    if (cartItems.length === 0) {
-      router.push('/menu'); // Redirect to /menu if the cart is empty
+    if (cart?.length === 0) {
+      router.push('/'); // Redirect to /menu if the cart is empty
     }
-  }, [cartItems, router]);
+  }, [cart, router]);
 
   // Watch the selected location
   const selectedLocation = watch("serviceFee");
@@ -62,7 +57,7 @@ const Checkout = () => {
   }, []);
 
   const calculateSubtotal = () => {
-    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   };
 
   const subtotal = calculateSubtotal();
@@ -73,8 +68,9 @@ const Checkout = () => {
     const vat = Number(subtotal) * 0.075;
     return Number(subtotal) + Number(serviceFee) + Number(vat);
   };
-  const token = getCookie("euodia_token");
-  const id = getCookie("euodia_user");
+
+  const token = getCookie("gc_token");
+  const id = getCookie("gc_user");
 
   const handleCheckout = async (data) => {
     try {
@@ -88,7 +84,7 @@ const Checkout = () => {
             _type: "reference",
             _ref: data.serviceFee,
           },
-          cartItems,
+          cartItems: cart,
           userId,
           amount: Math.round(calculateTotal()),
         };
@@ -103,8 +99,8 @@ const Checkout = () => {
 
         await axios.post("/api/order", orderData, config).then((res) => {
           setLoading(false);
-          dispatch(clearCart());
-          toast.success("order placed", {
+          clearCart(); // Clear the cart using Zustand
+          toast.success("Order placed", {
             position: "top-right",
             duration: 3000,
           });
@@ -130,7 +126,7 @@ const Checkout = () => {
   };
 
   return (
-    <HomeLayout>
+    <>
       <div className="min-h-screen bg-gray-100 p-6 flex items-center justify-center">
         <div className="container max-w-screen-lg mx-auto">
           <div className="bg-white rounded-lg shadow-lg p-6">
@@ -220,7 +216,6 @@ const Checkout = () => {
                     )}
                   </div>
 
-
                   <div className="mb-4">
                     <label
                       className="block text-sm font-medium text-gray-700"
@@ -243,97 +238,45 @@ const Checkout = () => {
                     )}
                   </div>
 
-
-                  <div className="mb-4">
-                    <label
-                      className="block text-sm font-medium text-gray-700"
-                      htmlFor="email"
-                    >
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      {...register("email", {
-                        required: "Email Address is required",
-                      })}
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                    />
-                    {errors.email && (
-                      <p className="text-red-600">{errors.email.message}</p>
-                    )}
-                  </div>
-                  <div className="mb-4">
-                    <label
-                      className="block text-sm font-medium text-gray-700"
-                      htmlFor="location"
-                    >
-                      Delivery Area
-                    </label>
-                    <select
-                      id="serviceFee"
-                      {...register("serviceFee", {
-                        required: "Delivery Area is required",
-                      })}
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                    >
-                      <option value="">Select your closest Delivery area</option>
-                      {serviceFees.map((fee) => (
-                        <option key={fee._id} value={fee._id}>
-                          {fee.location} - {formatCurrency(fee.fee)}
-                        </option>
-                      ))}
-                    </select>
-                    {errors.serviceFee && (
-                      <p className="text-red-600">{errors.serviceFee.message}</p>
-                    )}
-                  </div>
-
-                  <div className="text-center">
-                    <button
-                      type="submit"
-                      className="w-full py-2  text-white bg-green-600 rounded-md hover:bg-green-700"
-                    >
-                      Place Order
-                    </button>
-                  </div>
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                  >
+                    Proceed to Checkout
+                  </button>
                 </form>
               </div>
 
+              {/* Summary Section */}
               <div>
                 <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
-                <div className="space-y-4">
-                  {/* Render Cart Items */}
-                  {cartItems.map((item, index) => (
-                    <div key={index} className="flex justify-between">
-                      <div>
-                        <p className="text-sm font-medium">{item.name}</p>
-                        <p className="text-sm ">
-                          {item.quantity} x {formatCurrency(item.price)}
-                        </p>
-                      </div>
-                      <div>{formatCurrency(item.price * item.quantity)}</div>
-                    </div>
+                <ul>
+                  {cart.map((item) => (
+                    <li key={item.id} className="flex justify-between">
+                      <span>{item.name} (x{item.quantity})</span>
+                      <span>{formatCurrency(item.price * item.quantity)}</span>
+                    </li>
                   ))}
-                  <hr />
-                  <div className="flex justify-between font-semibold">
-                    <div>Subtotal</div>
-                    <div>{formatCurrency(subtotal)}</div>
-                  </div>
-                  <div className="flex justify-between font-semibold">
-                    <div>VAT (7.5%)</div>
-                    <div>{formatCurrency(vat)}</div>
-                  </div>
-                  <div className="flex justify-between font-semibold">
-                    <div>Service Fee</div>
-                    <div>{formatCurrency(selectedServiceFee)}</div>
-                  </div>
-                  <hr />
-                  <div className="flex justify-between text-base font-semibold">
-                    <div>Total</div>
-                    <div>{formatCurrency(calculateTotal())}</div>
-                  </div>
-                </div>
+                </ul>
+                <hr className="my-4" />
+                <p className="flex justify-between">
+                  <span>Subtotal</span>
+                  <span>{formatCurrency(subtotal)}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span>VAT (7%)</span>
+                  <span>{formatCurrency(vat)}</span>
+                </p>
+                <p className="flex justify-between">
+                  <span>Service Fee</span>
+                  <span>{formatCurrency(selectedServiceFee)}</span>
+                </p>
+                <hr className="my-4" />
+                <p className="flex justify-between font-bold">
+                  <span>Total</span>
+                  <span>{formatCurrency(calculateTotal())}</span>
+                </p>
               </div>
             </div>
           </div>
@@ -341,11 +284,8 @@ const Checkout = () => {
       </div>
 
       {loading && <LoadingScreen />}
-    </HomeLayout>
-
-
-  
+    </>
   );
 };
 
-export default Checkout;
+export default Checkout

@@ -3,15 +3,15 @@ import { FaRegStar, FaRegEye, FaOpencart } from 'react-icons/fa';
 
 const ProductCard = ({ product, onAddToCart, onViewDetails }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden relative group">
+    <div className="bg-white   shadow-md rounded-lg overflow-hidden relative group">
       {/* Product Image with Overlay */}
-      <div className="relative">
+      <div className="relative max-w-lg ">
         <Image
           src={product.images[0]?.asset.url || '/default-image.jpg'} // Fallback for missing image
           alt={product.title}
-          width={400}
-          height={400}
-          className="w-full object-cover"
+          width={200}
+          height={200}
+          className="w-full max-w-sm object-cover"
         />
         
         {/* Hover Content */}

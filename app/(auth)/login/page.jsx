@@ -42,6 +42,7 @@ export default function Login() {
       });
       if (response) {
         setCookie("gc_token", response?.data?.token);
+        setCookie("gc_user", response?.data?.user);
       }
 
       setLoading(false);

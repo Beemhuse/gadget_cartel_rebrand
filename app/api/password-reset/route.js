@@ -1,5 +1,5 @@
+import { client } from '@/sanity/lib/client';
 import sendResetMailToUser from '@/utils/lib/sendResetMailToUser';
-import { client } from '@/utils/sanity/client';
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 

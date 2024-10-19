@@ -1,5 +1,5 @@
 import { verifyPaystackPayment } from "@/utils/lib/verify";
-import { updateTransactionStatus } from "@/utils/sanity/client";
+import { updateTransactionStatus } from "@/utils/sanity";
 
 export const GET = async (req) => {
   try {

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { client } from '@/utils/sanity/client';
 import slugify from 'slugify';
 import { isAdmin } from '@/utils/lib/auth';
+import { client } from '@/sanity/lib/client';
 
 export async function POST(req) {
   if (!isAdmin(req.headers)) {

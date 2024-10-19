@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import useSWR from "swr";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import Typography from "@/components/reusables/typography/Typography";

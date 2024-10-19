@@ -1,4 +1,4 @@
-import { client } from "@/utils/sanity/client";
+import { client } from "@/sanity/lib/client";
 
 const getMostOrderedDishQuery = `
 *[_type == "order"] {

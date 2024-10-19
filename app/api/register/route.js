@@ -1,16 +1,8 @@
-// pages/api/signup.js
 import { createUser, getUserByEmail } from '@/utils/sanity';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 
-// import crypto from 'crypto';
-// import { createUser, getUserByEmail } from '@/utils/sanity/client';
-
-// Function to generate a random secret key
-// const generateRandomSecret = () => {
-//   return crypto.randomBytes(32).toString('hex');
-// };
 
 export  async function POST(req) {
  

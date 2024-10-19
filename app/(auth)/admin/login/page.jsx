@@ -2,17 +2,16 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import InputComponent from "@/components/reusables/input/InputComponent";
 import { useForm } from "react-hook-form";
-import Button from "@/components/reusables/buttons/Button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { handleGenericError } from "@/utils/errorHandler";
-import useCookies from "@/hooks/useCookies";
-import { toast } from "react-toastify";
 import Link from "next/link";
-import "@/app/globals.css";
 import Image from "next/image";
+import useCookies from "@/components/hooks/useCookies";
+import { handleGenericError } from "@/utils/errorHandler";
+import InputComponent from "@/components/reusables/input/InputComponent";
+import Button from "@/components/reusables/buttons/Button";
+import toast from "react-hot-toast";
 
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),

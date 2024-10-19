@@ -1,10 +1,9 @@
 "use client";
 import { useState } from 'react';
-import InputComponent from "@/components/reusables/input/InputComponent";
-import Button from "@/components/reusables/buttons/Button";
-import { toast, ToastContainer } from "react-toastify";
-import "@/app/globals.css"
 import Image from 'next/image';
+import InputComponent from '@/components/reusables/input/InputComponent';
+import Button from '@/components/reusables/buttons/Button';
+import toast from 'react-hot-toast';
 
 export default function Page() {
   const [email, setEmail] = useState('');
@@ -85,8 +84,6 @@ export default function Page() {
           </a>
         </p>
       </form>
-
-      <ToastContainer />
     </div>
     </>
   );

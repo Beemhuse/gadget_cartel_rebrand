@@ -8,6 +8,7 @@ import LoadingScreen from "@/components/reusables/LoadingScreen";
 import useCurrencyFormatter from "@/components/hooks/useCurrencyFormatter";
 import useCartStore from "@/components/store/cartStore";
 import { getCookie } from "@/utils/getCookie";
+import { client } from "@/sanity/lib/client";
 
 const Checkout = () => {
   const { cart, clearCart } = useCartStore(); // Access Zustand store

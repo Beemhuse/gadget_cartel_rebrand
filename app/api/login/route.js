@@ -1,12 +1,7 @@
 import { getUserIdByEmail } from '@/utils/lib/getUserIdByEmail';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-// import crypto from 'crypto';
 
-// Function to generate a random secret key
-// const generateRandomSecret = () => {
-//   return crypto.randomBytes(32).toString('hex');
-// };
 
 export async function POST(req) {
   try {

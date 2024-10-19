@@ -1,93 +1,57 @@
-"use client"
 import Image from 'next/image';
-import React, { useState } from 'react';
-import { AiOutlineHeart, AiFillStar, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+import { FaRegStar, FaRegEye, FaOpencart } from 'react-icons/fa';
 
-const ProductCard = ({ product }) => {
-  const [quantity, setQuantity] = useState(1);
-
-  // Increase quantity
-  const increaseQuantity = () => setQuantity((prev) => prev + 1);
-
-  // Decrease quantity
-  const decreaseQuantity = () => {
-    if (quantity > 1) setQuantity((prev) => prev - 1);
-  };
-
+const ProductCard = ({ product, onAddToCart, onViewDetails }) => {
   return (
-    <div className="w-64 bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-      {/* Discount Badge */}
-      {product.discount && (
-        <div className="absolute top-4 left-4 bg-green-100 text-green-700 text-xs font-bold py-1 px-2 rounded">
-          {product.discount}
+    <div className="bg-white shadow-md rounded-lg overflow-hidden relative group">
+      {/* Product Image with Overlay */}
+      <div className="relative">
+        <Image
+          src={product.images[0]?.asset.url || '/default-image.jpg'} // Fallback for missing image
+          alt={product.title}
+          width={400}
+          height={400}
+          className="w-full object-cover"
+        />
+        
+        {/* Hover Content */}
+        <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center">
+          {/* Action Buttons */}
+          <div className="flex items-center gap-4 mb-4">
+            <button className="text-black bg-white p-4 text-xl">
+              <FaRegStar />
+            </button>
+            <button
+              onClick={() => onViewDetails(product.slug.current)}
+              className="text-black bg-white p-4 text-xl"
+            >
+              <FaRegEye />
+            </button>
+            <button
+              onClick={() => onAddToCart(product)}
+              className="text-black bg-white p-4 text-xl"
+            >
+              <FaOpencart />
+            </button>
+          </div>
         </div>
-      )}
-
-      {/* Wishlist Icon */}
-      <div className="absolute top-4 right-4 text-gray-400 cursor-pointer hover:text-red-500 transition-colors duration-300">
-        <AiOutlineHeart size={24} />
       </div>
 
-      {/* Product Image */}
-      <Image
-        src={product.image}
-        alt={product.name}
-        height={500}
-        width={500}
-        className="w-full h-32 object-contain my-4"
-      />
-
-      {/* Product Name */}
-      <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
-
-      {/* Unit and Rating */}
-      <div className="flex items-center text-gray-500 text-sm my-2">
-        <span className="mr-4">1 UNIT</span>
-        <span className="flex items-center">
-          <AiFillStar className="text-yellow-400" /> {product.rating}
-        </span>
-      </div>
-
-      {/* Price */}
-      <p className="text-xl font-bold text-gray-800">${product.price}</p>
-
-      {/* Quantity Selector and Add to Cart */}
-      <div className="flex items-center justify-between mt-4">
-        {/* Quantity Selector */}
-        <div className="flex items-center border border-gray-300 rounded">
-          <button
-            className="px-2 py-1 text-gray-600 hover:bg-gray-200 transition-colors"
-            onClick={decreaseQuantity}
-          >
-            <AiOutlineMinus />
-          </button>
-          <span className="px-4 py-1 text-gray-700">{quantity}</span>
-          <button
-            className="px-2 py-1 text-gray-600 hover:bg-gray-200 transition-colors"
-            onClick={increaseQuantity}
-          >
-            <AiOutlinePlus />
-          </button>
-        </div>
-
-        {/* Add to Cart Button */}
-        <button className="text-sm font-semibold text-indigo-600 hover:underline">
-          Add to Cart
-        </button>
+      {/* Product Details */}
+      <div className="p-4 text-center">
+        <h4 className="text-xl font-semibold mb-2">{product.title}</h4>
+        <span className="text-gray-500">{product.price}</span>
+        {/* Review Stars */}
+        <ul className="flex justify-center mt-2 space-x-1 text-yellow-500">
+          {[...Array(5)].map((_, i) => (
+            <li key={i}>
+              <FaRegStar />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
-};
-
-// Default props for the ProductCard component
-ProductCard.defaultProps = {
-  product: {
-    name: "Sunstar Fresh Melon Juice",
-    image: "https://via.placeholder.com/100", // Replace with your image URL
-    price: 18.0,
-    rating: 4.5,
-    discount: "-30%",
-  },
 };
 
 export default ProductCard;

@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { RiDeleteBinLine } from "react-icons/ri";
 import useCurrencyFormatter from '@/components/hooks/useCurrencyFormatter';
 import useCartStore from '@/components/store/cartStore';
+import { urlFor } from '@/sanity/lib/image';
 
 export default function Cart() {
   const cartItems = useCartStore((state) => state.cart); // Retrieve cart items from Zustand
@@ -75,7 +76,7 @@ export default function Cart() {
                       <tr key={item.id} className="border-t">
                         <td className="px-4 py-2 flex items-center">
                           <Image
-                            src={item?.images[0]}
+                            src={urlFor(item?.images[0]).url()}
                             alt={item.title}
                             width={50}
                             height={50}

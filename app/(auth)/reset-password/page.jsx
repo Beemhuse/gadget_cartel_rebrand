@@ -1,13 +1,11 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import InputComponent from "@/components/reusables/input/InputComponent";
-import Button from "@/components/reusables/buttons/Button";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "@/app/globals.css";
 import Link from "next/link";
 import Image from "next/image";
+import toast from "react-hot-toast";
+import InputComponent from "@/components/reusables/input/InputComponent";
+import Button from "@/components/reusables/buttons/Button";
 
 export default function ResetPassword() {
   const router = useRouter();
@@ -87,7 +85,6 @@ export default function ResetPassword() {
         <Link href={"/"} className="text-center text-blue-700">Home</Link>
       </form>
 
-      <ToastContainer />
     </div>
     </>
   );

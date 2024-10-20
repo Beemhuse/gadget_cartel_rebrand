@@ -1,5 +1,5 @@
+import { client } from "@/sanity/lib/client";
 import sendMail from "@/utils/lib/sendMail";
-import { client } from "@/utils/sanity/client";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {

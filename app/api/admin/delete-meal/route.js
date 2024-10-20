@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { client } from '@/utils/sanity/client';
 import { isAdmin } from '@/utils/lib/auth';
+import { client } from '@/sanity/lib/client';
 
 export async function DELETE(req) {
   try {

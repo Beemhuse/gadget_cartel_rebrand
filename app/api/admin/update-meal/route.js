@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
-import { client } from '@/utils/sanity/client';
+import { client } from '@/sanity/lib/client';
 import { isAdmin } from '@/utils/lib/auth';
 import { uploadImageToSanity } from '@/utils/sanity/uploadImageToSanity';
+import { NextResponse } from 'next/server';
 
 export async function PATCH(req) {
   try {

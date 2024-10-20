@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation'; // Import router hook
 
-import HorizontalScroll from 'react-scroll-horizontal';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'; // Import icons for scroll buttons
 import { FaMobileAlt, FaLaptop, FaClock, FaTabletAlt, FaCamera } from 'react-icons/fa'; // Icons for categories
 import { client } from '@/sanity/lib/client';

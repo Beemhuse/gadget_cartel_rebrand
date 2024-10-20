@@ -1,6 +1,6 @@
 import { client } from '@/sanity/lib/client';
-import { ensureUserExists } from '../lib/checkUser';
 import { v4 as uuidv4 } from 'uuid'; // Import the UUID library for generating unique IDs
+import { ensureUserExists } from '../lib/checkUser';
 
 
 export const getUserByEmail = async (email) => {

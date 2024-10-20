@@ -1,4 +1,4 @@
-import { client } from "./client";
+import { client } from "@/sanity/lib/client";
 
 export async function updateAnonymousUserAfterOrder(userId, amount, order, success) {
   try {

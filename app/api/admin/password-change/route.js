@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import { client } from '@/utils/sanity/client';
+import { client } from '@/sanity/lib/client';
 
 export async function POST(req) {
   try {

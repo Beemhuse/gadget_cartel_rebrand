@@ -1,8 +1,8 @@
 // pages/api/signup.js
+import { getAdminByEmail } from '@/utils/sanity';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
-import { createAdmin, getAdminByEmail } from '@/utils/sanity/client';
 
 const secretKey = process.env.NEXT_PRIVATE_JWT_SECRET_KEY;
 

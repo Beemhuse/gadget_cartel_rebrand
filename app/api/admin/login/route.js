@@ -1,7 +1,8 @@
 // pages/api/login.js
+import { getAdminByEmail } from '@/utils/sanity';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { getAdminByEmail } from '@/utils/sanity/client';
+// import { getAdminByEmail } from '@/utils/sanity/client';
 
 const secretKey = process.env.NEXT_PRIVATE_JWT_SECRET_KEY;
 

@@ -1,4 +1,4 @@
-// pages/api/getUserByEmail.js
+
 import { findOrCreateCustomerByEmail } from "@/utils/sanity/findOrCreateCustomer";
 
 export async function POST(req) {
